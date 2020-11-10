@@ -1,0 +1,15 @@
+
+*.csv
+*.CPG
+*.dbf
+*.prj
+*.sbn
+*.sbx
+*.shp
+*.xml
+*.shx
+*.zip
+*.eps
+*.jpg
+.Rhistory
+R/LICENSE
