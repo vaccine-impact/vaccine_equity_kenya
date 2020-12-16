@@ -7,6 +7,9 @@ library (ggplot2)
 library (broom)
 library (dplyr)
 library (raster)
+library (maptools)
+library (gpclib)
+library (rgeos)
 
 # map tutorial
 # https://www.r-graph-gallery.com/168-load-a-shape-file-into-r.html
@@ -16,6 +19,9 @@ rm (list = ls())
 
 # create Kenya full vaccination coverage map using coverage data
 create_map <- function () {
+  
+  # give maptools the permission to use gpclib
+  gpclibPermit ()
   
   # read Kenya admin level map data
   my_spdf <- readOGR (dsn     = "kenya_region_shapefile",
@@ -69,8 +75,8 @@ create_map <- function () {
     geom_polygon (data = shapefile.df, 
                   aes (x = long, y = lat, group = group, fill = coverage), 
                   colour = "gold") +
-    labs (title = "     Full vaccination coverage among children aged 12-23 months in 8 provinces of Kenya", 
-          subtitle = "                 (1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)" ) +
+    # labs (title = "     Full vaccination coverage among children aged 12-23 months in 8 provinces of Kenya", 
+    #      subtitle = "                 (1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)" ) +
     # geom_polygon (data = shapefile.df [id == "Addis Ababa"], aes(x = long, y = lat, group = group, fill = coverage), colour = "gold") +
     # geom_polygon (data = shapefile.df [id == "Harari People"], aes(x = long, y = lat, group = group, fill = coverage), colour = "gold") +
     geom_text (data = pop.df, 
@@ -82,7 +88,7 @@ create_map <- function () {
     theme (plot.subtitle = element_text (size = 18)) +
     theme (legend.title = element_text(size = 16),
            legend.text = element_text(size = 16)) + 
-    scale_fill_continuous (name  = "coverage (%)", 
+    scale_fill_continuous (name  = "full \nimmunisation \ncoverage (%)", 
                            trans = "reverse", 
                            guide = guide_colourbar(reverse = TRUE))
   
@@ -90,13 +96,13 @@ create_map <- function () {
   
   # save map figure to file
   ggsave (filename = "plot_Kenya_vaccination_coverage.jpg",
-          width = 10 * 1.11,
+          width = 11 * 1.11,
           height = 9 * 1.15 * asp,
           units = "in",
           dpi = 600)
   
   ggsave (filename = "plot_Kenya_vaccination_coverage.eps",
-          width = 10 * 1.11,
+          width = 11 * 1.11,
           height = 9 * 1.15 * asp,
           units = "in",
           device = cairo_ps)
