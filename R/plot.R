@@ -37,13 +37,13 @@ for (i in 1:5) {
                       # maternal characteristics
                       "3" = plot_data [characteristics == "Maternal age" | 
                                          characteristics == "Maternal education" | 
-                                         characteristics == "Maternal partnership status" |
-                                         characteristics == "Maternal status within household"], 
+                                         characteristics == "Maternal marital status" |
+                                         characteristics == "Maternal household head status"], 
                       # child characteristics
                       "4" = plot_data [characteristics == "Sex of child" | 
                                          characteristics == "Birth order"],
                       # birth setting characteristics
-                      "5" = plot_data [characteristics == "Birth setting"]
+                      "5" = plot_data [characteristics == "Place of birth"]
                       )
   
   # plot title
@@ -52,7 +52,7 @@ for (i in 1:5) {
                         "2" = "Geographic characteristics", 
                         "3" = "Maternal characteristics", 
                         "4" = "Child characteristics", 
-                        "5" = "Birth setting characteristics")
+                        "5" = "Place of birth characteristics")
   
   # plot
   plot_list [[i]] <- ggplot (data = plot_dat, 
@@ -81,8 +81,8 @@ p <- ggarrange (plotlist = plot_list, ncol = 5, nrow = 1)
 
 p <- annotate_figure (p,
                       # top = text_grob ("Basic vaccination coverage by socioeconomic, geographic, maternal, and child characteristics",
-                      top = text_grob ("  Full vaccination coverage among children aged 12-23 months in Kenya by
-   socioeconomic, geographic, maternal, child, and birth setting characteristics
+                      top = text_grob ("  Full immunisation coverage among children aged 12-23 months in Kenya by
+   socioeconomic, geographic, maternal, child, and place of birth characteristics
 (1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)\n",
                                        color = "black", 
                                        size = 40))
@@ -122,11 +122,11 @@ for (i in 1:11) {
                       "4" = plot_data [characteristics == "Province"],
                       "5" = plot_data [characteristics == "Maternal age"],
                       "6" = plot_data [characteristics == "Maternal education"],
-                      "7" = plot_data [characteristics == "Maternal partnership status"],
-                      "8" = plot_data [characteristics == "Maternal status within household"], 
+                      "7" = plot_data [characteristics == "Maternal marital status"],
+                      "8" = plot_data [characteristics == "Maternal household head status"], 
                       "9" = plot_data [characteristics == "Sex of child"],
                      "10" = plot_data [characteristics == "Birth order"],
-                     "11" = plot_data [characteristics == "Birth setting"]
+                     "11" = plot_data [characteristics == "Place of birth"]
                       )
   
   # plot
@@ -151,7 +151,7 @@ p <- ggarrange (plotlist = plot_list, ncol = 3, nrow = 4)
 
 p <- annotate_figure (p,
                    # top = text_grob ("Adjusted odds ratios of basic vaccination coverage in children aged 12-23 months
-                     top = text_grob ("  Adjusted odds ratios of full vaccination coverage among children aged 12-23 months in Kenya
+                     top = text_grob ("  Adjusted odds ratios of full immunisation coverage among children aged 12-23 months in Kenya
 (1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)\n",
                                       color = "black", 
                                       size = 20))
