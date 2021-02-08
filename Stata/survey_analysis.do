@@ -7,7 +7,7 @@
 // log using analysis.log, replace
 
 // set working directory
-cd "C:\Users\kajam\Downloads\ken"
+cd "C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata"
 
 // 2014 Kenya DHS dataset
 // download from DHS upon registration
