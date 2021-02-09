@@ -3,6 +3,9 @@
 
 // Survey analysis of 2014 Kenya DHS
 
+// Using DHS datasets for analysis
+// https://www.dhsprogram.com/data/Using-DataSets-for-Analysis.cfm
+
 // log file
 // log using analysis.log, replace
 
@@ -13,6 +16,10 @@ cd "C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata"
 // download from DHS upon registration
 // https://www.dhsprogram.com/data/dataset/Kenya_Standard-DHS_2014.cfm
 use KEKR72FL.dta, clear
+
+// Sampling weights
+// https://blog.dhsprogram.com/sampling-weighting-at-dhs/
+// https://dhsprogram.com/Data/Guide-to-DHS-Statistics/Analyzing_DHS_Data.htm
 
 // 2-stage cluster sampling procedure
 // survey weighting
@@ -422,26 +429,43 @@ svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union 
 
 // -----------------------------------------------------------------------------
 // Check for collinearity
+// Multicollinearity occurs when there are high correlations among predictor variables, 
+// leading to unreliable and unstable estimates of regression coefficients. 
 
 regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rural i.region, base
 estat vif
 
 // Check impact of removing region on collinearity 
+// check for collinearity between region and ethnicity
 regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rural, base
 estat vif
 
 // Check impact of removing ethnicity on collinearity 
+// check for collinearity between ethnicity and region
 regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region, base
 estat vif
+// remove ethnicity
+
+// Check impact of removing religion on collinearity 
+// check for collinearity between religion and region
+regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
+estat vif
+// remove religion
+
+// Check impact of removing maternal age at birth on collinearity
+// check for collinearity between maternal age and birth order
+regress fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
+estat vif
+// remove maternal age at birth
 
 // Full test for collinearity
 collin sex birthord matagebirth3 delivery educ union motherhhd wealth religion ethnic2 rural region
 // -----------------------------------------------------------------------------
 
 // *****************************************************************************
-// Final regression model, with all variables except ethnicity
+// Final regression model, with all variables (except ethnicity, religion, maternal age at birth)
 // table column: Adjusted odds ratio (AOR and 95% CI) + p-value
-svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region, base
+svy: logistic fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
 // *****************************************************************************
 
 
