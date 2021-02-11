@@ -7,7 +7,7 @@
 // https://www.dhsprogram.com/data/Using-DataSets-for-Analysis.cfm
 
 // log file
-// log using analysis.log, replace
+log using analysis.log, replace
 
 // set working directory
 cd "C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata"
@@ -395,33 +395,6 @@ Collinearity:
 http://www.philender.com/courses/categorical/notes2/collin.html
 */
 
-// -----------------------------------------------------------------------------
-// Test of Linearity using Likelihood-Ratio Test for ordered categorical variables
-
-logistic fullvac birthord
-est store A
-logistic fullvac i.birthord
-est store B
-lrtest A B
-
-logistic fullvac matagebirth3
-est store A
-logistic fullvac i.matagebirth3
-est store B
-lrtest A B
-
-logistic fullvac educ
-est store A
-logistic fullvac i.educ
-est store B
-lrtest A B
-
-logistic fullvac wealth
-est store A
-logistic fullvac i.wealth
-est store B
-lrtest A B
-// -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 // Multivariable regression of full model with 12 explanatory variables
@@ -446,31 +419,29 @@ regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.moth
 estat vif
 // remove ethnicity
 
-// Check impact of removing religion on collinearity 
+// Check impact of removing ethnicity and religion on collinearity 
 // check for collinearity between religion and region
 regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
 estat vif
-// remove religion
+// remove ethnicity and religion
 
 // Check impact of removing maternal age at birth on collinearity
 // check for collinearity between maternal age and birth order
 regress fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
 estat vif
-// remove maternal age at birth
+// keep maternal age at birth
 
 // Full test for collinearity
 collin sex birthord matagebirth3 delivery educ union motherhhd wealth religion ethnic2 rural region
 // -----------------------------------------------------------------------------
 
 // *****************************************************************************
-// Final regression model, with all variables (except ethnicity, religion, maternal age at birth)
+// Final regression model, with all variables (except ethnicity, religion)
 // table column: Adjusted odds ratio (AOR and 95% CI) + p-value
-svy: logistic fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
+svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
 // *****************************************************************************
 
-
-
-
+// -----------------------------------------------------------------------------
 // Tests for effect modification
 ** Check sample sizes in each category
 tab matagebirth3 educ, col
@@ -487,49 +458,37 @@ label define labeducbin 1 "None" 2 "Some"
 label value educbin labeducbin
 tab educbin educ
 
-gen mv=1 if delivery==. | religion==. | ethnic==.
+* Test for interaction -- Maternal age at birth and maternal education
+svy: logistic fullvac i.sex i.birthord i.matagebirth3##i.educbin i.delivery i.union i.motherhhd i.wealth i.rural i.region, base
+contrast matagebirth3##educbin
+margins matagebirth3##educbin
+marginsplot
+margins r.educbin@matagebirth3
+marginsplot, yline(0)
 
-** Add interaction terms and test each interaction separately
-logistic fullvac i.sex i.birthord i.matagebirth3##i.educ i.delivery i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
+* Test for interaction -- Household wealth and maternal age at birth
+svy: logistic fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth##i.matagebirth3 i.rural i.region, base
+contrast wealth##matagebirth3
+margins wealth##matagebirth3
+marginsplot
+margins r.matagebirth3@wealth
+marginsplot, yline(0)
 
-logistic fullvac i.sex i.birthord i.matagebirth3##i.educbin i.delivery i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educbin i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
+* Test for interaction -- Household wealth and maternal education
+svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.union i.motherhhd i.wealth##i.educbin i.rural i.region, base
+contrast wealth##educbin
+margins wealth##educbin
+marginsplot
+margins r.educbin@wealth
+marginsplot, yline(0)
 
-logistic fullvac i.sex i.birthord i.matagebirth3##i.wealth i.delivery i.educ i.union i.motherhhd i.religion i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
+* Test for interaction -- Household wealth and place of residence
+svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth##i.rural i.region, base
+contrast wealth##rural
+margins wealth##rural
+marginsplot
+margins r.rural@wealth
+marginsplot, yline(0)
+// -----------------------------------------------------------------------------
 
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.wealth##i.educ i.union i.motherhhd i.religion i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
-
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.wealth##i.educbin i.union i.motherhhd i.religion i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educbin i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
-
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.religion i.wealth##i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
-
-logistic fullvac i.sex i.birthord i.matagebirth3 i.educ i.union i.motherhhd i.wealth i.religion i.delivery##i.rural i.region if mv!=1, base
-estimates store A
-logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region if mv!=1, base
-estimates store B
-lrtest A B
-
-// log close
+log close
