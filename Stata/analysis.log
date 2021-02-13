@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata\analysis.log
   log type:  text
- opened on:  12 Feb 2021, 00:00:01
+ opened on:  13 Feb 2021, 21:02:59
 
 . 
 . // set working directory
@@ -79,6 +79,28 @@ all files already exist and are up to date.
 (16,128 observations deleted)
 
 . *Reduces n from 20,093 to 3,965 (deleted 16,128)
+. // -----------------------------------------------------------------------------
+. 
+. // -----------------------------------------------------------------------------
+. //  proportions of male and female children
+. svy: tab b4
+(running tabulate on estimation sample)
+
+Number of strata   =        92                  Number of obs     =      3,965
+Number of PSUs     =     1,391                  Population size   = 3,677.5106
+                                                Design df         =      1,299
+
+----------------------
+sex of    |
+child     | proportion
+----------+-----------
+     male |      .5205
+   female |      .4795
+          | 
+    Total |          1
+----------------------
+  Key:  proportion  =  cell proportion
+
 . // -----------------------------------------------------------------------------
 . 
 . // -----------------------------------------------------------------------------
@@ -428,8 +450,8 @@ all files already exist and are up to date.
 . // (excluding polio dose given at birth)
 . gen fullvac=0
 
-. replace fullvac = 1 if inlist(bcg, 1) & inlist(dpt1, 1) & inlist(dpt2, 1) & inlist(dpt3, 1) & inlist(polio1, 1) & inlist(
-> polio2, 1) & inlist(polio3, 1) & inlist(measles, 1) & inlist(pcv1, 1) & inlist(pcv2, 1) & inlist(pcv3, 1)
+. replace fullvac = 1 if inlist(bcg, 1) & inlist(dpt1, 1) & inlist(dpt2, 1) & inlist(dpt3, 1) & inlist(polio1, 1) & inlist(polio2, 1) & inlist(polio3, 1) & inlist(
+> measles, 1) & inlist(pcv1, 1) & inlist(pcv2, 1) & inlist(pcv3, 1)
 (2,643 real changes made)
 
 . tab fullvac
@@ -445,8 +467,8 @@ all files already exist and are up to date.
 . // Generate new variables for basic vaccination
 . gen basicvac=0
 
-. replace basicvac = 1 if inlist(bcg, 1) & inlist(dpt1, 1) & inlist(dpt2, 1) & inlist(dpt3, 1) & inlist(polio1, 1) & inlist
-> (polio2, 1) & inlist(polio3, 1) & inlist(measles, 1)
+. replace basicvac = 1 if inlist(bcg, 1) & inlist(dpt1, 1) & inlist(dpt2, 1) & inlist(dpt3, 1) & inlist(polio1, 1) & inlist(polio2, 1) & inlist(polio3, 1) & inlist
+> (measles, 1)
 (2,773 real changes made)
 
 . tab basicvac
@@ -499,27 +521,27 @@ all files already exist and are up to date.
 . tab birthord bord
 
      Birth |
-   order - |                                         birth order number
-       Few |         1          2          3          4          5          6          7          8          9 |     Total
------------+---------------------------------------------------------------------------------------------------+----------
-         1 |       882          0          0          0          0          0          0          0          0 |       882 
-       2-3 |         0        811        691          0          0          0          0          0          0 |     1,502 
-       4-5 |         0          0          0        501        354          0          0          0          0 |       855 
-        6+ |         0          0          0          0          0        261        197        102         67 |       704 
------------+---------------------------------------------------------------------------------------------------+----------
-     Total |       882        811        691        501        354        261        197        102         67 |     3,943 
+   order - |                                                         birth order number
+       Few |         1          2          3          4          5          6          7          8          9         10         11         12 |     Total
+-----------+------------------------------------------------------------------------------------------------------------------------------------+----------
+         1 |       882          0          0          0          0          0          0          0          0          0          0          0 |       882 
+       2-3 |         0        811        691          0          0          0          0          0          0          0          0          0 |     1,502 
+       4-5 |         0          0          0        501        354          0          0          0          0          0          0          0 |       855 
+        6+ |         0          0          0          0          0        261        197        102         67         37         22         11 |       704 
+-----------+------------------------------------------------------------------------------------------------------------------------------------+----------
+     Total |       882        811        691        501        354        261        197        102         67         37         22         11 |     3,943 
 
 
      Birth |
-   order - |                   birth order number
-       Few |        10         11         12         13         14 |     Total
------------+-------------------------------------------------------+----------
-         1 |         0          0          0          0          0 |       882 
-       2-3 |         0          0          0          0          0 |     1,502 
-       4-5 |         0          0          0          0          0 |       855 
-        6+ |        37         22         11          6          1 |       704 
------------+-------------------------------------------------------+----------
-     Total |        37         22         11          6          1 |     3,943 
+   order - |  birth order number
+       Few |        13         14 |     Total
+-----------+----------------------+----------
+         1 |         0          0 |       882 
+       2-3 |         0          0 |     1,502 
+       4-5 |         0          0 |       855 
+        6+ |         6          1 |       704 
+-----------+----------------------+----------
+     Total |         6          1 |     3,943 
 
 . 
 . // Recode maternal age at birth into three groups
@@ -575,24 +597,14 @@ all files already exist and are up to date.
 
 . tab delivery m15
 
-                 |                                    place of delivery
-Delivery setting | responden  other hom  governmen  govt heal  govt disp  other pub  mission h  private h |     Total
------------------+----------------------------------------------------------------------------------------+----------
-            Home |     1,556        170          0          0          0          0          0          0 |     1,726 
-Clinical setting |         0          0      1,054        366        264          2        303        165 |     2,184 
-           Other |         0          0          0          0          0          0          0          0 |        26 
------------------+----------------------------------------------------------------------------------------+----------
-           Total |     1,556        170      1,054        366        264          2        303        165 |     3,936 
-
-
-                 |        place of delivery
-Delivery setting | nursing/m  other pri      other |     Total
------------------+---------------------------------+----------
-            Home |         0          0          0 |     1,726 
-Clinical setting |        29          1          0 |     2,184 
-           Other |         0          0         26 |        26 
------------------+---------------------------------+----------
-           Total |        29          1         26 |     3,936 
+                 |                                                    place of delivery
+Delivery setting | responden  other hom  governmen  govt heal  govt disp  other pub  mission h  private h  nursing/m  other pri      other |     Total
+-----------------+-------------------------------------------------------------------------------------------------------------------------+----------
+            Home |     1,556        170          0          0          0          0          0          0          0          0          0 |     1,726 
+Clinical setting |         0          0      1,054        366        264          2        303        165         29          1          0 |     2,184 
+           Other |         0          0          0          0          0          0          0          0          0          0         26 |        26 
+-----------------+-------------------------------------------------------------------------------------------------------------------------+----------
+           Total |     1,556        170      1,054        366        264          2        303        165         29          1         26 |     3,936 
 
 . 
 . // Recode religion to group Christian faiths
@@ -779,8 +791,7 @@ Rural-Urba |       residence
 
 . label var region "Region"
 
-. label define labregion 1 "North eastern" 2 "Nairobi" 3 "Rift Valley" 4 "Nyanza" 5 "Coast" 6 "Western" 7 "Central" 8 "East
-> ern"
+. label define labregion 1 "North eastern" 2 "Nairobi" 3 "Rift Valley" 4 "Nyanza" 5 "Coast" 6 "Western" 7 "Central" 8 "Eastern"
 
 . label value region labregion
 
@@ -1922,8 +1933,7 @@ Note: _cons estimates baseline odds.
 . 
 . /* 
 > Regression diagnostics:
-> https://stats.idre.ucla.edu/stata/webbooks/reg/chapter2/stata-webbooksregressionwith-statachapter-2-regression-diagnostic
-> s/
+> https://stats.idre.ucla.edu/stata/webbooks/reg/chapter2/stata-webbooksregressionwith-statachapter-2-regression-diagnostics/
 > 
 > Collinearity:
 > http://www.philender.com/courses/categorical/notes2/collin.html
@@ -1932,8 +1942,7 @@ Note: _cons estimates baseline odds.
 . 
 . // -----------------------------------------------------------------------------
 . // Multivariable regression of full model with 12 explanatory variables
-. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2
->  i.rural i.region, base
+. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rural i.region, base
 (running logistic on estimation sample)
 
 Survey: Logistic regression
@@ -2031,8 +2040,7 @@ Note: _cons estimates baseline odds.
 . // Multicollinearity occurs when there are high correlations among predictor variables, 
 . // leading to unreliable and unstable estimates of regression coefficients. 
 . 
-. regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rur
-> al i.region, base
+. regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rural i.region, base
 
       Source |       SS           df       MS      Number of obs   =     3,929
 -------------+----------------------------------   F(37, 3891)     =     10.22
@@ -2176,8 +2184,7 @@ matagebirth3 |
 . 
 . // Check impact of removing region on collinearity 
 . // check for collinearity between region and ethnicity
-. regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rur
-> al, base
+. regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.ethnic2 i.rural, base
 
       Source |       SS           df       MS      Number of obs   =     3,929
 -------------+----------------------------------   F(30, 3898)     =     11.18
@@ -2303,8 +2310,7 @@ matagebirth3 |
 . 
 . // Check impact of removing ethnicity on collinearity 
 . // check for collinearity between ethnicity and region
-. regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.regio
-> n, base
+. regress fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.religion i.rural i.region, base
 
       Source |       SS           df       MS      Number of obs   =     3,930
 -------------+----------------------------------   F(29, 3900)     =     11.66
@@ -2699,8 +2705,7 @@ matagebirth3      1.79    1.34    0.5579      0.4421
 . // *****************************************************************************
 . // Final regression model, with all variables (except ethnicity, religion)
 . // table column: Adjusted odds ratio (AOR and 95% CI) + p-value
-. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, ba
-> se
+. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
 (running logistic on estimation sample)
 
 Survey: Logistic regression
@@ -2941,8 +2946,7 @@ Rural-Urba |         Delivery setting
 
 . 
 . * Test for interaction -- Maternal age at birth and maternal education
-. svy: logistic fullvac i.sex i.birthord i.matagebirth3##i.educbin i.delivery i.union i.motherhhd i.wealth i.rural i.region
-> , base
+. svy: logistic fullvac i.sex i.birthord i.matagebirth3##i.educbin i.delivery i.union i.motherhhd i.wealth i.rural i.region, base
 (running logistic on estimation sample)
 
 Survey: Logistic regression
@@ -3113,8 +3117,7 @@ Note: F statistics are adjusted for the survey design.
 
 . 
 . * Test for interaction -- Household wealth and maternal age at birth
-. svy: logistic fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth##i.matagebirth3 i.rural i.region, b
-> ase
+. svy: logistic fullvac i.sex i.birthord i.delivery i.educ i.union i.motherhhd i.wealth##i.matagebirth3 i.rural i.region, base
 (running logistic on estimation sample)
 
 Survey: Logistic regression
@@ -3319,8 +3322,7 @@ Note: F statistics are adjusted for the survey design.
 
 . 
 . * Test for interaction -- Household wealth and maternal education
-. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.union i.motherhhd i.wealth##i.educbin i.rural i.region
-> , base
+. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.union i.motherhhd i.wealth##i.educbin i.rural i.region, base
 (running logistic on estimation sample)
 
 Survey: Logistic regression
@@ -3504,8 +3506,7 @@ Note: F statistics are adjusted for the survey design.
 
 . 
 . * Test for interaction -- Household wealth and place of residence
-. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth##i.rural i.region, b
-> ase
+. svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth##i.rural i.region, base
 (running logistic on estimation sample)
 
 Survey: Logistic regression
@@ -3695,5 +3696,5 @@ Note: F statistics are adjusted for the survey design.
       name:  <unnamed>
        log:  C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata\analysis.log
   log type:  text
- closed on:  12 Feb 2021, 00:00:35
----------------------------------------------------------------------------------------------------------------------------
+ closed on:  13 Feb 2021, 21:03:55
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------

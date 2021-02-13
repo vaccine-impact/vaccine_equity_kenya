@@ -33,7 +33,7 @@ for (i in 1:5) {
                                          characteristics == "Ethnicity"],
                       # geographic characteristics
                       "2" = plot_data [characteristics == "Place of residence" | 
-                                         characteristics == "Province"],
+                                         characteristics == "Region"],
                       # maternal characteristics
                       "3" = plot_data [characteristics == "Maternal age" | 
                                          characteristics == "Maternal education" | 
@@ -60,6 +60,8 @@ for (i in 1:5) {
                                   y = coverage, 
                                   fill = -coverage)) + 
     geom_bar (stat = "identity", width = 0.75, alpha=0.9) + 
+    geom_errorbar (aes (ymin = low_95ci, ymax = high_95ci, width = 0.25), 
+                   col = "orange") + 
     labs (x = "",
           y = "Basic vaccination coverage (%)", 
           title = plot_title
@@ -113,20 +115,19 @@ plot_data <- fread ("data_aor.csv")
 plot_list <- vector (mode = "list", length = 2)
 
 # loop through 11 subplots
-for (i in 1:11) {
+for (i in 1:10) {
   
   plot_dat <- switch (i, 
                       "1" = plot_data [characteristics == "Household wealth"], 
-                      "2" = plot_data [characteristics == "Religion"],
-                      "3" = plot_data [characteristics == "Place of residence"],
-                      "4" = plot_data [characteristics == "Province"],
-                      "5" = plot_data [characteristics == "Maternal age"],
-                      "6" = plot_data [characteristics == "Maternal education"],
-                      "7" = plot_data [characteristics == "Maternal marital status"],
-                      "8" = plot_data [characteristics == "Maternal household head status"], 
-                      "9" = plot_data [characteristics == "Sex of child"],
-                     "10" = plot_data [characteristics == "Birth order"],
-                     "11" = plot_data [characteristics == "Place of birth"]
+                      "2" = plot_data [characteristics == "Place of residence"],
+                      "3" = plot_data [characteristics == "Region"],
+                      "4" = plot_data [characteristics == "Maternal education"],
+                      "5" = plot_data [characteristics == "Birth order"],
+                      "6" = plot_data [characteristics == "Place of birth"],
+                      "7" = plot_data [characteristics == "Maternal age"],
+                      "8" = plot_data [characteristics == "Maternal marital status"],
+                      "9" = plot_data [characteristics == "Maternal household head status"], 
+                     "10" = plot_data [characteristics == "Sex of child"]
                       )
   
   # plot
