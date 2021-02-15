@@ -2,10 +2,10 @@
       name:  <unnamed>
        log:  C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata\analysis.log
   log type:  text
- opened on:  13 Feb 2021, 21:02:59
+ opened on:  15 Feb 2021, 15:00:53
 
 . 
-. // set working directory
+. // set working directory where DHS dataset is located
 . cd "C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata"
 C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata
 
@@ -3696,5 +3696,5 @@ Note: F statistics are adjusted for the survey design.
       name:  <unnamed>
        log:  C:\Users\kajam\OneDrive\Documents\GitHub\vaccine_equity_kenya\Stata\analysis.log
   log type:  text
- closed on:  13 Feb 2021, 21:03:55
+ closed on:  15 Feb 2021, 15:01:30
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
