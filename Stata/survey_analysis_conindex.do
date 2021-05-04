@@ -443,7 +443,6 @@ collin sex birthord matagebirth3 delivery educ union motherhhd wealth religion e
 // *****************************************************************************
 // Final regression model, with all variables (except ethnicity, religion)
 // table column: Adjusted odds ratio (AOR and 95% CI) + p-value
-* Final regression model
 svy: logistic fullvac i.sex i.birthord i.matagebirth3 i.delivery i.educ i.union i.motherhhd i.wealth i.rural i.region, base
 // *****************************************************************************
 
@@ -496,5 +495,37 @@ marginsplot
 margins r.rural@wealth
 marginsplot, yline(0)
 // -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// Concentration index
+
+* wealth index
+gen wealth_index = v191/10^5
+gen cluster = v001
+
+* concentration index -- Standard CI (covariance method)
+conindex fullvac [aw = wgt], rankvar (wealth_index) truezero cluster (cluster)
+sca CI = r(CI)
+
+* concentration index -- Erreygeres CI (correction for bounded variables)
+conindex fullvac [aw = wgt], rankvar(wealth_index) bounded limits(0 1) erreygers cluster (cluster)
+scalar CIerr = r(CI)
+
+* print standard and Erreygers normilized concentration indices
+display in red "Standard concentration index (wealth):", CI	
+display in red "Erreygers concentration index (wealth):", CIerr
+
+
+
+
+
+//svy: conindex fullvac, rankvar(wealth_index) bounded limits (0 1) wagstaff svy
+
+* concentration curve
+//conindex fullvac, rankvar (wealth_index) truezero svy graph
+
+// -----------------------------------------------------------------------------
+
 
 log close

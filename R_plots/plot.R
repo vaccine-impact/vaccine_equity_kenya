@@ -4,6 +4,7 @@
 library (data.table)
 library (ggplot2)
 library (ggpubr)
+library (dplyr)
 
 # clear workspace
 rm (list = ls ())
@@ -56,7 +57,7 @@ for (i in 1:5) {
   
   # plot
   plot_list [[i]] <- ggplot (data = plot_dat, 
-                             aes (x = reorder (specific_characteristics, -coverage), 
+                             aes (x = reorder (specific_characteristics, desc (specific_order)), 
                                   y = coverage, 
                                   fill = -coverage)) + 
     geom_bar (stat = "identity", width = 0.75, alpha=0.9) + 
@@ -81,13 +82,14 @@ for (i in 1:5) {
 # arrange plot columns and rows
 p <- ggarrange (plotlist = plot_list, ncol = 5, nrow = 1)
 
-p <- annotate_figure (p,
-                      # top = text_grob ("Basic vaccination coverage by socioeconomic, geographic, maternal, and child characteristics",
-                      top = text_grob ("  Full immunisation coverage among children aged 12-23 months in Kenya by
-   socioeconomic, geographic, maternal, child, and place of birth characteristics
-(1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)\n",
-                                       color = "black", 
-                                       size = 40))
+# # plot title
+# p <- annotate_figure (p,
+#                       # top = text_grob ("Basic vaccination coverage by socioeconomic, geographic, maternal, and child characteristics",
+#                       top = text_grob ("  Full immunisation coverage among children aged 12-23 months in Kenya by
+#    socioeconomic, geographic, maternal, child, and place of birth characteristics
+# (1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)\n",
+#                                        color = "black", 
+#                                        size = 40))
 
 # print plot
 print (p)
@@ -132,30 +134,34 @@ for (i in 1:10) {
   
   # plot
   plot_list [[i]] <- ggplot (data = plot_dat, 
-                             aes (x = reorder (specific_characteristics, -AOR), 
+                             aes (x = reorder (specific_characteristics, desc (specific_order)), 
+                             # aes (x = specific_characteristics,
                                   y = AOR, 
-                                  fill = -AOR)) + 
+                                  fill = factor (AOR))) + 
+    scale_fill_brewer (palette = "Reds") +
     geom_bar (stat = "identity", width = 0.75, alpha=0.9) + 
     geom_errorbar (aes (ymin = low_95ci, ymax = high_95ci, width = 0.25), 
-                   col = "orange") + 
+                   col = "black") + 
     coord_flip () + 
     facet_grid (characteristics ~ ., scales = "free") +
     theme_bw () + 
     theme (legend.position="none") + 
     theme (axis.title.x = element_blank (),
            axis.title.y = element_blank ()) +
-    theme (strip.text.y = element_text (size = 11))
+    theme (strip.text.y = element_text (size = 11)) 
 }
 
 # arrange plot columns and rows
 p <- ggarrange (plotlist = plot_list, ncol = 3, nrow = 4)
 
-p <- annotate_figure (p,
-                   # top = text_grob ("Adjusted odds ratios of basic vaccination coverage in children aged 12-23 months
-                     top = text_grob ("  Adjusted odds ratios of full immunisation coverage among children aged 12-23 months in Kenya
-(1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)\n",
-                                      color = "black", 
-                                      size = 20))
+# # plot title
+# p <- annotate_figure (p,
+#                    # top = text_grob ("Adjusted odds ratios of basic vaccination coverage in children aged 12-23 months
+#                      top = text_grob ("  Adjusted odds ratios of full immunisation coverage among children aged 12-23 months in Kenya
+# (1-dose BCG, 3-dose DTP-HepB-Hib, 3-dose polio, 1-dose measles, 3-dose PCV)\n",
+#                                       color = "black", 
+#                                       size = 20))
+
 # print plot
 print (p)
 
