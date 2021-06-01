@@ -1,4 +1,5 @@
-Childhood vaccination coverage in Kenya by socioeconomic, geographic, maternal, child, and birth setting characteristics: equity impact analysis
+Inequities in childhood immunisation coverage associated with socioeconomic, geographic, maternal, child, and place of birth characteristics in Kenya
 
-The DHS survey dataset is analysed and regression analysis is conducted in Stata.
-The visualisations are created using R.
+Preprint: https://doi.org/10.1101/2021.02.14.21251721
+
+The DHS survey dataset is analysed and regression analysis is conducted in Stata. The visualisations are created using R.
