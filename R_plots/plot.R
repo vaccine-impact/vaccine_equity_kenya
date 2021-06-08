@@ -148,7 +148,8 @@ for (i in 1:10) {
     theme (legend.position="none") + 
     theme (axis.title.x = element_blank (),
            axis.title.y = element_blank ()) +
-    theme (strip.text.y = element_text (size = 11)) 
+    theme (strip.text.y = element_text (size = 11))  + 
+    theme (text = element_text(size=15))
 }
 
 # arrange plot columns and rows
@@ -168,12 +169,12 @@ print (p)
 # save plot to file
 ggsave (filename = "plot_aor.jpg", 
         plot = p, 
-        units = "in", width = 12, height = 12, 
-        dpi = 300)
+        units = "in", width = 15, height = 12, 
+        dpi = 600)
 
 ggsave (filename = "plot_aor.eps", 
         plot = p, 
-        units = "in", width = 12, height = 12,
+        units = "in", width = 15, height = 12,
         device = cairo_ps)
 
 
