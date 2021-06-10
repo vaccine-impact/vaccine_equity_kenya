@@ -98,7 +98,7 @@ print (p)
 ggsave (filename = "plot_socioeconomic_geographic_maternal_child_birthsetting_coverage.jpg", 
         plot = p, 
         units = "in", width = 40, height = 20, 
-        dpi = 300)
+        dpi = 600)
 
 ggsave (filename = "plot_socioeconomic_geographic_maternal_child_birthsetting_coverage.eps", 
         plot = p, 
