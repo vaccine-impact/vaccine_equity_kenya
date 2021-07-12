@@ -1,0 +1,50 @@
+characteristics,specific_characteristics,specific_order,coverage,low_95ci,high_95ci
+Household wealth,poorest,1,58.3,54.5,61.9
+Household wealth,poorer,2,69,65.2,72.7
+Household wealth,middle,3,72.7,67.7,77.1
+Household wealth,richer,4,73.7,68.2,78.5
+Household wealth,richest,5,71.3,63.6,78
+Religion,Muslim,1,60.4,54.1,66.4
+Religion,No religion,2,67,56.6,75.9
+Religion,Christian,3,69,66.6,71.3
+Religion,Other,4,46,23.6,70
+Ethnicity,Somali,1,50,42.5,57.5
+Ethnicity,Maasai,2,45.9,35,57.2
+Ethnicity,Mbere,3,43.9,24.4,65.5
+Ethnicity,Luo,4,59.6,54.2,64.8
+Ethnicity,Kalenjin,5,66.4,61.6,71
+Ethnicity,Luhya,6,66.4,60.4,71.9
+Ethnicity,Kamba,7,74.4,66.8,80.9
+Ethnicity,Kikuya,8,76.7,69.5,82.6
+Ethnicity,Other,9,72.6,68.3,76.5
+Place of residence,rural,1,68.4,66.2,70.6
+Place of residence,urban,2,67.8,62.6,72.5
+Region,North Eastern,1,42.3,35.6,49.3
+Region,Nairobi,2,59.7,46,72.1
+Region,Rift Valley,3,65.2,61.8,68.4
+Region,Nyanza,4,64.4,59.8,68.7
+Region,Coast,5,73.4,67.8,78.3
+Region,Western,6,72.4,66.8,77.4
+Region,Central,7,78.3,72.4,83.3
+Region,Eastern,8,78.4,72.1,83.6
+Maternal age,10-19 years,1,66,60.2,71.3
+Maternal age,20-29 years,2,69.8,66.6,72.8
+Maternal age,30+ years,3,65.8,61.6,69.7
+Maternal education,None,1,50.4,45.1,55.8
+Maternal education,Primary,2,68.1,65.4,70.6
+Maternal education,Secondary,3,73.3,68.3,77.8
+Maternal education,Higher,4,78.9,67.6,87
+Maternal marital status,Formerly married,1,63.4,53.6,72.2
+Maternal marital status,Married,2,68.4,66.1,70.7
+Maternal marital status,Never married,3,70.9,63.4,77.4
+Maternal household head status,Head of household,1,67.9,63.3,72.1
+Maternal household head status,Not head of household,2,68.3,65.6,70.8
+Sex of child,Male,1,67.9,65.1,70.6
+Sex of child,Female,2,68.5,65.5,71.4
+Birth order,First-born,1,71.2,65.3,76.4
+Birth order,Second- or third-born,2,71.2,68,74.3
+Birth order,Fourth- or fifth-born,3,68.6,64.2,72.6
+Birth order,Sixth-born or higher,4,54.4,49.3,59.3
+Place of birth,Home,1,60.3,57,63.4
+Place of birth,Clinical setting,2,72.7,69.4,75.7
+Place of birth,Other,3,75.2,50.7,90

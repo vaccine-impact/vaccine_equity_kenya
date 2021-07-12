@@ -1,0 +1,37 @@
+characteristics,specific_characteristics,specific_order,AOR,low_95ci,high_95ci
+Household wealth,poorest,1,1,,
+Household wealth,poorer,2,1.25,0.94,1.66
+Household wealth,middle,3,1.43,1.06,1.93
+Household wealth,richer,4,1.57,1.09,2.28
+Household wealth,richest,5,1.52,0.96,2.41
+Place of residence,rural,1,1,,
+Place of residence,urban,2,0.74,0.58,0.93
+Region,North Eastern,1,1,,
+Region,Nairobi,2,0.81,0.41,1.6
+Region,Rift Valley,3,1.39,0.95,2.04
+Region,Nyanza,4,1.14,0.74,1.76
+Region,Coast,5,2.35,1.53,3.61
+Region,Western,6,1.76,1.11,2.79
+Region,Central,7,1.74,1.05,2.89
+Region,Eastern,8,2.33,1.45,3.75
+Maternal age,10-19 years,1,1,,
+Maternal age,20-29 years,2,1.2,0.86,1.67
+Maternal age,30+ years,3,1.22,0.77,1.92
+Maternal education,None,1,1,,
+Maternal education,Primary,2,1.54,1.11,2.14
+Maternal education,Secondary,3,1.73,1.15,2.6
+Maternal education,Higher,4,2.37,1.24,4.54
+Maternal marital status,Formerly married,1,1,,
+Maternal marital status,Married,2,1.34,0.89,2.04
+Maternal marital status,Never married,3,1.23,0.7,2.15
+Maternal household head status,Head of household,1,1,,
+Maternal household head status,Not head of household,2,0.93,0.72,1.18
+Sex of child,Male,1,1,,
+Sex of child,Female,2,1.03,0.86,1.23
+Birth order,First-born,1,1,,
+Birth order,Second- or third-born,2,1.08,0.78,1.49
+Birth order,Fourth- or fifth-born,3,1.05,0.72,1.53
+Birth order,Sixth-born or higher,4,0.63,0.39,1
+Place of birth,Home,1,1,,
+Place of birth,Clinical setting,2,1.41,1.12,1.77
+Place of birth,Other,3,1.61,0.58,4.5
