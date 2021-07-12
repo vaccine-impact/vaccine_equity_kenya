@@ -1,16 +1,6 @@
 
-*.CPG
-*.dbf
-*.prj
-*.sbn
-*.sbx
-*.shp
-*.xml
-*.shx
-*.zip
-*.eps
-*.jpg
-.Rhistory
-R/LICENSE
 Stata/KEKR72FL.DTA
 Stata/analysis.log
+R_plots/*.eps
+R_plots/*.jpg
+R_plots/.Rhistory
