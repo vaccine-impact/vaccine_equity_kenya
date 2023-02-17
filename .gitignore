@@ -4,3 +4,5 @@ Stata/analysis.log
 R_plots/*.eps
 R_plots/*.jpg
 R_plots/.Rhistory
+Stata/analysis.log
+Stata/survey_analysis_temp.do
